@@ -1,0 +1,6 @@
+@AsystentNieruchomosci.Api_HostAddress = http://localhost:5208
+
+GET {{AsystentNieruchomosci.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
