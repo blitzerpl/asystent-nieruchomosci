@@ -2,15 +2,10 @@ using AsystentNieruchomosci.Application.Common.Interfaces;
 
 namespace AsystentNieruchomosci.Api.Services;
 
-public class CorrelationIdProvider : ICorrelationIdProvider
+public class CorrelationIdProvider(IHttpContextAccessor httpContextAccessor) : ICorrelationIdProvider
 {
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
     private const string CorrelationIdItemKey = "CorrelationId";
-
-    public CorrelationIdProvider(IHttpContextAccessor httpContextAccessor)
-    {
-        _httpContextAccessor = httpContextAccessor;
-    }
 
     public string? GetCorrelationId()
     {

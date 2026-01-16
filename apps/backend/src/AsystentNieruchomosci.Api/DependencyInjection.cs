@@ -1,3 +1,4 @@
+using AsystentNieruchomosci.Api.Middleware;
 using AsystentNieruchomosci.Api.Services;
 using AsystentNieruchomosci.Application;
 using AsystentNieruchomosci.Application.Common.Interfaces;
@@ -14,7 +15,10 @@ public static class DependencyInjection
 
         services.AddHttpContextAccessor();
         services.AddScoped<IEnvironmentProvider, WebHostEnvironmentProvider>();
-        services.AddScoped<ICorrelationIdProvider, CorrelationIdProvider>();
+        services.AddSingleton<ICorrelationIdProvider, CorrelationIdProvider>();
+
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddProblemDetails();
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();

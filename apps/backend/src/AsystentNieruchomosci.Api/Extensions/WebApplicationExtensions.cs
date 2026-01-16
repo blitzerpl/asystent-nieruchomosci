@@ -8,6 +8,7 @@ public static class WebApplicationExtensions
     public static WebApplication UseApiMiddleware(this WebApplication app)
     {
         app.UseMiddleware<CorrelationIdMiddleware>();
+        app.UseExceptionHandler();
 
         if (app.Environment.IsDevelopment())
         {
