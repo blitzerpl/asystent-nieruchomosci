@@ -8,6 +8,7 @@ public static class WebApplicationExtensions
     public static WebApplication UseApiMiddleware(this WebApplication app)
     {
         app.UseMiddleware<CorrelationIdMiddleware>();
+        app.UseCors();
         app.UseExceptionHandler();
 
         if (app.Environment.IsDevelopment())
@@ -23,6 +24,11 @@ public static class WebApplicationExtensions
     {
         var rootGroup = app.MapGroup(string.Empty);
         rootGroup.MapHealthEndpoints();
+
+        if (app.Environment.IsDevelopment())
+        {
+            rootGroup.MapTestEndpoints();
+        }
 
         return app;
     }
